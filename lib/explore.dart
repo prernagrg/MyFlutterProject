@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:learn/filter_sheet.dart';
 import 'package:learn/foodcard.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -161,28 +162,34 @@ class ExplorePageState extends State<ExplorePage> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          _buildChip(Icons.tune, 'Filters'),
+                          _buildChip(Icons.tune, 'Filters', () {
+                            _displayFilterDialog(context);
+                          }),
                           SizedBox(width: 8),
-                          _buildChip(Icons.swap_vert, 'Sort By'),
+                          _buildChip(Icons.swap_vert, 'Sort By', () {}),
                           SizedBox(width: 8),
                           _buildChip(
                             Icons.thumb_up_alt_outlined,
                             'Highly Recommend',
+                            () {},
                           ),
                           SizedBox(width: 8),
                           _buildChip(
                             Icons.thumb_up_alt_outlined,
                             'Highly Recommend',
+                            () {},
                           ),
                           SizedBox(width: 8),
                           _buildChip(
                             Icons.thumb_up_alt_outlined,
                             'Highly Recommend',
+                            () {},
                           ),
                           SizedBox(width: 8),
                           _buildChip(
                             Icons.thumb_up_alt_outlined,
                             'Highly Recommend',
+                            () {},
                           ),
                         ],
                       ),
@@ -247,27 +254,51 @@ class ExplorePageState extends State<ExplorePage> {
     );
   }
 
-  Widget _buildChip(IconData icon, String label) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+  Widget _buildChip(IconData icon, String label, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 16, color: Colors.black87),
+            SizedBox(width: 6),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+            ),
+          ],
+        ),
       ),
-      child: Row(
-        children: [
-          Icon(icon, size: 16, color: Colors.black87),
-          SizedBox(width: 6),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
+    );
+  }
+
+  Future _displayFilterDialog(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: 611,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
             ),
           ),
-        ],
-      ),
+          child: FilterSheet(),
+        );
+      },
     );
   }
 }
