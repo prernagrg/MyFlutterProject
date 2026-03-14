@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn/home.dart';
+import 'package:learn/explore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MyHomePage(),
+      home: const ExplorePage(),
     );
   }
 }
