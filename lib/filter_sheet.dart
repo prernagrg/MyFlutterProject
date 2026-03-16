@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FilterSheet extends StatefulWidget {
   const FilterSheet({super.key});
@@ -116,7 +117,7 @@ class _FilterSheetState extends State<FilterSheet> {
                     children: [
                       _buildCategoryTab(
                         'Sort by',
-                        Icons.filter_alt_outlined,
+                        'assets/icons/sort.svg',
                         _sortByKey,
                       ),
                       // SizedBox(height: 8),
@@ -124,25 +125,25 @@ class _FilterSheetState extends State<FilterSheet> {
                       // SizedBox(height: 8),
                       _buildCategoryTab(
                         'Rating',
-                        Icons.star_border,
+                        'assets/icons/rating.svg',
                         _ratingKey,
                       ),
                       // SizedBox(height: 8),
                       _buildCategoryTab(
                         'Offers',
-                        Icons.local_offer_outlined,
+                        'assets/icons/offers.svg',
                         _offersKey,
                       ),
                       // SizedBox(height: 8),
                       _buildCategoryTab(
-                        'Dish price',
-                        Icons.restaurant_menu,
+                        'Dish\nprice',
+                        'assets/icons/price.svg',
                         null,
                       ),
                       // SizedBox(height: 8),
                       _buildCategoryTab(
                         'Trust\n Makers',
-                        Icons.verified_user_outlined,
+                        'assets/icons/trustmakers.svg',
                         null,
                       ),
                     ],
@@ -335,7 +336,6 @@ class _FilterSheetState extends State<FilterSheet> {
                         ),
                       ),
 
-                      // Extra space at bottom so the last item can scroll to top
                       SizedBox(height: 300),
                     ],
                   ),
@@ -344,12 +344,72 @@ class _FilterSheetState extends State<FilterSheet> {
             ],
           ),
         ),
-        SizedBox(height: 68),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: Offset(0, -4),
+              ),
+            ],
+          ),
+
+          child: Row(
+            children: [
+              SizedBox(
+                width: 125,
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colors.green),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text(
+                    'Reset',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFF7A00),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text(
+                    'Apply',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
 
-  Widget _buildCategoryTab(String title, IconData icon, GlobalKey? sectionKey) {
+  Widget _buildCategoryTab(String title, String icon, GlobalKey? sectionKey) {
     bool isSelected = _selectedCategory == title;
 
     return GestureDetector(
@@ -381,7 +441,13 @@ class _FilterSheetState extends State<FilterSheet> {
           children: [
             Column(
               children: [
-                Icon(icon, color: isSelected ? Colors.red : Colors.grey[600]),
+                // Icon(icon, color: isSelected ? Colors.red : Colors.grey[600]),
+                SvgPicture.asset(
+                  icon,
+                  color: isSelected ? Colors.red : Colors.grey[600],
+                  height: 14,
+                  width: 14,
+                ),
                 SizedBox(height: 4),
                 Text(
                   title,

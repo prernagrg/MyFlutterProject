@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:learn/filter_sheet.dart';
 import 'package:learn/foodcard.dart';
+import 'package:learn/map_widget.dart';
+import 'package:learn/map_screen.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
@@ -104,7 +106,7 @@ class ExplorePageState extends State<ExplorePage> {
             left: 0,
             right: 0,
             height: MediaQuery.of(context).size.height * 0.43,
-            child: Image.asset('assets/images/map.png', fit: BoxFit.cover),
+            child: const MapWidget(),
           ),
           CustomScrollView(
             controller: _scrollController,
@@ -230,6 +232,19 @@ class ExplorePageState extends State<ExplorePage> {
           ),
         ],
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MapScreen()),
+            );
+          },
+          backgroundColor: Colors.red,
+          child: const Icon(Icons.map, color: Colors.white),
+        ),
+      ),
     );
   }
 
@@ -288,7 +303,7 @@ class ExplorePageState extends State<ExplorePage> {
       backgroundColor: Colors.transparent,
       builder: (context) {
         return Container(
-          height: 611,
+          height: 570,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
