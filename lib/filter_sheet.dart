@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'custom_button.dart';
 
 class FilterSheet extends StatefulWidget {
   const FilterSheet({super.key});
@@ -361,45 +362,21 @@ class _FilterSheetState extends State<FilterSheet> {
             children: [
               SizedBox(
                 width: 125,
-                child: OutlinedButton(
+                child: CustomButton(
+                  text: 'Reset',
                   onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.green),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                  ),
-                  child: Text(
-                    'Reset',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  isOutlined: true,
+                  borderColor: Colors.green,
+                  textColor: Colors.black,
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
-                child: ElevatedButton(
+                child: CustomButton(
+                  text: 'Apply',
                   onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFF7A00),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                  ),
-                  child: Text(
-                    'Apply',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  backgroundColor: const Color(0xFFFF7A00),
+                  textColor: Colors.white,
                 ),
               ),
             ],
