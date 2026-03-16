@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'custom_textfield.dart';
+import 'custom_button.dart';
 
 enum TrackerStepState { completed, active, inactive }
 
@@ -9,10 +11,19 @@ class TrackerStepData {
   const TrackerStepData({required this.title, required this.subtitle});
 }
 
-class TrackOrderScreen extends StatelessWidget {
+class TrackOrderScreen extends StatefulWidget {
   final int currentStep;
 
   const TrackOrderScreen({super.key, this.currentStep = 6});
+
+  @override
+  State<TrackOrderScreen> createState() => _TrackOrderScreenState();
+}
+
+class _TrackOrderScreenState extends State<TrackOrderScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _instructionController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   final List<TrackerStepData> steps = const [
     TrackerStepData(title: 'Order Confirmed', subtitle: '12:00 PM'),
@@ -36,9 +47,22 @@ class TrackOrderScreen extends StatelessWidget {
   ];
 
   @override
+  void dispose() {
+    _instructionController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Track Order'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        foregroundColor: Colors.black,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -64,6 +88,56 @@ class TrackOrderScreen extends StatelessWidget {
                     state: _getStepState(index),
                   );
                 }),
+                const SizedBox(height: 32),
+                const Text(
+                  'Delivery Instruction',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        hintText: "Eg: Don't make it to spicy",
+                        controller: _instructionController,
+                        maxLines: 3,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some delivery instructions';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        hintText: "Alternate Phone Number (Optional)",
+                        controller: _phoneController,
+                        keyboardType: TextInputType.phone,
+                      ),
+                      const SizedBox(height: 24),
+                      SizedBox(
+                        width: double.infinity,
+                        child: CustomButton(
+                          text: 'Submit Instructions',
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              print("=== FORM SUBMITTED ===");
+                              print("Instructions: ${_instructionController.text}");
+                              print("Alternate Phone: ${_phoneController.text}");
+                            }
+                          },
+                          backgroundColor: const Color(0xFFFF7A00),
+                          textColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -73,9 +147,9 @@ class TrackOrderScreen extends StatelessWidget {
   }
 
   TrackerStepState _getStepState(int index) {
-    if (index < currentStep) {
+    if (index < widget.currentStep) {
       return TrackerStepState.completed;
-    } else if (index == currentStep) {
+    } else if (index == widget.currentStep) {
       return TrackerStepState.active;
     } else {
       return TrackerStepState.inactive;
