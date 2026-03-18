@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learn/home.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:learn/restaurant1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MyHomePage(),
+      home: FirstRestroPage(),
     );
   }
 }
