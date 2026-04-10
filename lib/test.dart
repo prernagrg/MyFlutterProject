@@ -10,7 +10,6 @@ class IncreaseButton extends StatefulWidget {
 class IncreaseButtonState extends State<IncreaseButton> {
   int count = 0;
   void increment() {
-    setState(() {});
     count++;
   }
 
