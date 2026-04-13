@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:learn/custom_appBar.dart';
 import 'package:learn/filter_sheet.dart';
+import 'package:learn/utilities/menu_card.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,185 +15,660 @@ class _MenuPageState extends State<MenuPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  final List<String> tabs = ["All", "Pizza", "Burger", "Drinks", "Dessert"];
+  final List<String> tabs = [
+    "Set Meal",
+    "Pizza",
+    "Momo",
+    "Burger",
+    "Drinks",
+    "Dessert",
+  ];
 
-  final List<String> filters = ["Veg", "Non-Veg", "Popular", "New", "Offers"];
-  final List<Map<String, String>> items = List.generate(
-    10,
-    (index) => {"name": "Item $index", "price": "\$${index + 5}"},
-  );
+  //CATEGORY-WISE DATA
+  final Map<String, List<Map<String, dynamic>>> menuData = {
+    "Set Meal": [
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Set Meal Deluxe',
+        'price': 'Rs 500',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+    ],
+
+    "Pizza": [
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/pizza.jpg',
+        'name': 'Cheese Pizza',
+        'price': 'Rs 450',
+        'taste': 'Medium Spicy',
+        'isVeg': true,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+    ],
+
+    "Momo": [
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Chicken Momo',
+        'price': 'Rs 230',
+        'taste': 'Spicy',
+        'isVeg': false,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Veg Momo',
+        'price': 'Rs 200',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Chicken Momo',
+        'price': 'Rs 230',
+        'taste': 'Spicy',
+        'isVeg': false,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Veg Momo',
+        'price': 'Rs 200',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Chicken Momo',
+        'price': 'Rs 230',
+        'taste': 'Spicy',
+        'isVeg': false,
+        'isSpicy': true,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/momo.jpg',
+        'name': 'Veg Momo',
+        'price': 'Rs 200',
+        'taste': 'Mild',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+    ],
+
+    "Burger": [
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/carousel.png',
+        'name': 'Chicken Burger',
+        'price': 'Rs 350',
+        'taste': 'Mild',
+        'isVeg': false,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+    ],
+
+    "Drinks": [
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+      {
+        'image': 'assets/images/kfc.png',
+        'name': 'Cold Drink',
+        'price': 'Rs 100',
+        'taste': 'Cold',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': false,
+      },
+    ],
+
+    "Dessert": [
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+      {
+        'image': 'assets/images/chicken.jpg',
+        'name': 'Ice Cream',
+        'price': 'Rs 150',
+        'taste': 'Sweet',
+        'isVeg': true,
+        'isSpicy': false,
+        'isPopular': true,
+      },
+    ],
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: tabs.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppbar(
         isTwoIcon: true,
-        icon: Icon(Icons.call),
+        icon: const Icon(Icons.call),
         title: 'Menu',
         isBack: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 0, bottom: 24),
+        padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
         child: Column(
           children: [
-            //Filter sheet horizontal scroll
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      _displayFilterDialog(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Color(0xFFCED7E2), width: 1),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/Filter.svg'),
-                            SizedBox(width: 8),
-                            Text('Filters'),
-                            SizedBox(width: 6),
-                            Icon(Icons.arrow_drop_down),
-                          ],
-                        ),
-                      ),
+            // FILTER BAR
+            SizedBox(
+              height: 50,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    _buildFilterButton(
+                      icon: 'assets/icons/Filter.svg',
+                      text: 'Filters',
+                      showArrow: true,
                     ),
-                  ),
-                  SizedBox(width: 7),
-                  InkWell(
-                    onTap: () {
-                      _displayFilterDialog(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Color(0xFFCED7E2), width: 1),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/veg.svg'),
-                            SizedBox(width: 8),
-                            Text('Veg'),
-                            SizedBox(width: 6),
-                          ],
-                        ),
-                      ),
+                    _buildFilterButton(
+                      icon: 'assets/icons/veg.svg',
+                      text: 'Veg',
                     ),
-                  ),
-                  SizedBox(width: 7),
-                  InkWell(
-                    onTap: () {
-                      _displayFilterDialog(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Color(0xFFCED7E2), width: 1),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/nonveg.svg'),
-                            SizedBox(width: 8),
-                            Text('Non veg'),
-                            SizedBox(width: 6),
-                          ],
-                        ),
-                      ),
+                    _buildFilterButton(
+                      icon: 'assets/icons/nonveg.svg',
+                      text: 'Non Veg',
                     ),
-                  ),
-                  SizedBox(width: 7),
-                  InkWell(
-                    onTap: () {
-                      _displayFilterDialog(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Color(0xFFCED7E2), width: 1),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/veg.svg'),
-                            SizedBox(width: 8),
-                            Text('Veg'),
-                            SizedBox(width: 6),
-                          ],
-                        ),
-                      ),
+                    _buildFilterButton(
+                      icon: 'assets/icons/veg.svg',
+                      text: 'Veg',
                     ),
-                  ),
-                  SizedBox(width: 7),
-                  InkWell(
-                    onTap: () {
-                      _displayFilterDialog(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Color(0xFFCED7E2), width: 1),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/nonveg.svg'),
-                            SizedBox(width: 8),
-                            Text('Non veg'),
-                            SizedBox(width: 6),
-                          ],
-                        ),
-                      ),
+                    _buildFilterButton(
+                      icon: 'assets/icons/nonveg.svg',
+                      text: 'Non Veg',
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            //Tabbar
+
+            const SizedBox(height: 4),
+
+            // TAB BAR
+            TabBar(
+              controller: _tabController,
+              isScrollable: true,
+              labelColor: Colors.orange,
+              unselectedLabelColor: Colors.black,
+              indicatorColor: Colors.orange,
+              dividerColor: Colors.transparent,
+              tabs: tabs.map((tab) => Tab(text: tab)).toList(),
+            ),
+
+            const SizedBox(height: 10),
+
+            // TAB CONTENT
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: tabs.map((tab) {
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      childAspectRatio: 0.8,
-                    ),
-                    itemBuilder: (context, index) {
-                      final item = items[index];
+                  final tabItems = menuData[tab] ?? [];
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.orange.shade50,
-                          borderRadius: BorderRadius.circular(12),
+                  return GridView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: tabItems.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.75,
                         ),
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.fastfood, size: 40),
-                            const SizedBox(height: 10),
-                            Text(item["name"]!),
-                            Text(item["price"]!),
-                          ],
-                        ),
+                    itemBuilder: (context, index) {
+                      final item = tabItems[index];
+
+                      return MenuCard(
+                        image: item["image"],
+                        title: item["name"],
+                        price: item["price"],
+                        taste: item["taste"],
+                        isveg: item["isVeg"],
+                        isSpicy: item["isSpicy"],
+                        isPopular: item["isPopular"],
                       );
                     },
                   );
@@ -205,6 +681,36 @@ class _MenuPageState extends State<MenuPage>
     );
   }
 
+  // FILTER BUTTON
+  Widget _buildFilterButton({
+    required String icon,
+    required String text,
+    bool showArrow = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 7),
+      child: InkWell(
+        onTap: () => _displayFilterDialog(context),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFFCED7E2)),
+          ),
+          child: Row(
+            children: [
+              SvgPicture.asset(icon, height: 16, width: 16),
+              const SizedBox(width: 8),
+              Text(text),
+              if (showArrow) const Icon(Icons.arrow_drop_down),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // FILTER SHEET
   Future _displayFilterDialog(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -213,14 +719,11 @@ class _MenuPageState extends State<MenuPage>
       builder: (context) {
         return Container(
           height: 570,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
           ),
-          child: FilterSheet(),
+          child: const FilterSheet(),
         );
       },
     );

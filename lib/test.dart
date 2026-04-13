@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn/cubit/counter_cubit.dart';
 
 class IncreaseButton extends StatefulWidget {
   const IncreaseButton({super.key});
@@ -8,21 +9,11 @@ class IncreaseButton extends StatefulWidget {
 }
 
 class IncreaseButtonState extends State<IncreaseButton> {
-  int count = 0;
-  void increment() {
-    count++;
-  }
-
-  void decrement() {
-    setState(() {
-      if (count > 0) {
-        count--;
-      }
-    });
-  }
+  final counterCubit = CounterCubit();
 
   @override
   Widget build(BuildContext context) {
+    final counter = counterCubit.state;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent.shade100,
@@ -59,7 +50,7 @@ class IncreaseButtonState extends State<IncreaseButton> {
               ),
               child: Column(
                 children: [
-                  Text('Count: $count', style: TextStyle(fontSize: 40)),
+                  Text('Count: $counter', style: TextStyle(fontSize: 40)),
                 ],
               ),
             ),
@@ -72,13 +63,19 @@ class IncreaseButtonState extends State<IncreaseButton> {
         children: [
           FloatingActionButton(
             heroTag: 'increment',
-            onPressed: increment,
+            onPressed: () {
+              counterCubit.increment();
+              setState(() {});
+            },
             child: Icon(Icons.add),
           ),
           SizedBox(height: 10),
           FloatingActionButton(
             heroTag: 'decrement',
-            onPressed: decrement,
+            onPressed: () {
+              counterCubit.decrement();
+              setState(() {});
+            },
             child: Icon(Icons.remove),
           ),
           SizedBox(height: 10),
