@@ -95,6 +95,7 @@ class MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                     SizedBox(height: 16),
+                    //Searchbar
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,

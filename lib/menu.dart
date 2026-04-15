@@ -13,6 +13,8 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage>
     with SingleTickerProviderStateMixin {
+  String searchText = '';
+
   late TabController _tabController;
 
   final List<String> tabs = [
@@ -24,7 +26,44 @@ class _MenuPageState extends State<MenuPage>
     "Dessert",
   ];
 
-  //CATEGORY-WISE DATA
+  // ✅ TODAY SPECIAL (updated with discount)
+  final List<Map<String, dynamic>> todaysSpecial = [
+    {
+      'image': 'assets/images/pizza.jpg',
+      'name': 'Cheese Pizza',
+      'price': 'Rs 450',
+      'taste': 'Medium Spicy',
+      'isVeg': true,
+      'isSpicy': true,
+      'isPopular': true,
+      'showDiscount': true,
+      'discountText': '50% OFF',
+    },
+    {
+      'image': 'assets/images/momo.jpg',
+      'name': 'Chicken Momo',
+      'price': 'Rs 230',
+      'taste': 'Spicy',
+      'isVeg': false,
+      'isSpicy': true,
+      'isPopular': true,
+      'showDiscount': true,
+      'discountText': '60% OFF',
+    },
+    {
+      'image': 'assets/images/chowmein.jpg',
+      'name': 'Burger Combo',
+      'price': 'Rs 350',
+      'taste': 'Mild',
+      'isVeg': false,
+      'isSpicy': false,
+      'isPopular': true,
+      'showDiscount': true,
+      'discountText': '30% OFF',
+    },
+  ];
+
+  // ✅ MENU DATA (same structure + discount added)
   final Map<String, List<Map<String, dynamic>>> menuData = {
     "Set Meal": [
       {
@@ -35,78 +74,8 @@ class _MenuPageState extends State<MenuPage>
         'isVeg': true,
         'isSpicy': false,
         'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Set Meal Deluxe',
-        'price': 'Rs 500',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
+        'showDiscount': true,
+        'discountText': '40% OFF',
       },
       {
         'image': 'assets/images/momo.jpg',
@@ -128,60 +97,8 @@ class _MenuPageState extends State<MenuPage>
         'isVeg': true,
         'isSpicy': true,
         'isPopular': true,
-      },
-      {
-        'image': 'assets/images/pizza.jpg',
-        'name': 'Cheese Pizza',
-        'price': 'Rs 450',
-        'taste': 'Medium Spicy',
-        'isVeg': true,
-        'isSpicy': true,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/pizza.jpg',
-        'name': 'Cheese Pizza',
-        'price': 'Rs 450',
-        'taste': 'Medium Spicy',
-        'isVeg': true,
-        'isSpicy': true,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/pizza.jpg',
-        'name': 'Cheese Pizza',
-        'price': 'Rs 450',
-        'taste': 'Medium Spicy',
-        'isVeg': true,
-        'isSpicy': true,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/pizza.jpg',
-        'name': 'Cheese Pizza',
-        'price': 'Rs 450',
-        'taste': 'Medium Spicy',
-        'isVeg': true,
-        'isSpicy': true,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/pizza.jpg',
-        'name': 'Cheese Pizza',
-        'price': 'Rs 450',
-        'taste': 'Medium Spicy',
-        'isVeg': true,
-        'isSpicy': true,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/pizza.jpg',
-        'name': 'Cheese Pizza',
-        'price': 'Rs 450',
-        'taste': 'Medium Spicy',
-        'isVeg': true,
-        'isSpicy': true,
-        'isPopular': true,
+        'showDiscount': true,
+        'discountText': '50% OFF',
       },
       {
         'image': 'assets/images/pizza.jpg',
@@ -221,42 +138,8 @@ class _MenuPageState extends State<MenuPage>
         'isVeg': false,
         'isSpicy': true,
         'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Veg Momo',
-        'price': 'Rs 200',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Chicken Momo',
-        'price': 'Rs 230',
-        'taste': 'Spicy',
-        'isVeg': false,
-        'isSpicy': true,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Veg Momo',
-        'price': 'Rs 200',
-        'taste': 'Mild',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/momo.jpg',
-        'name': 'Chicken Momo',
-        'price': 'Rs 230',
-        'taste': 'Spicy',
-        'isVeg': false,
-        'isSpicy': true,
-        'isPopular': true,
+        'showDiscount': true,
+        'discountText': '20% OFF',
       },
       {
         'image': 'assets/images/momo.jpg',
@@ -279,180 +162,9 @@ class _MenuPageState extends State<MenuPage>
         'isSpicy': false,
         'isPopular': true,
       },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/carousel.png',
-        'name': 'Chicken Burger',
-        'price': 'Rs 350',
-        'taste': 'Mild',
-        'isVeg': false,
-        'isSpicy': false,
-        'isPopular': true,
-      },
     ],
 
     "Drinks": [
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
-      {
-        'image': 'assets/images/kfc.png',
-        'name': 'Cold Drink',
-        'price': 'Rs 100',
-        'taste': 'Cold',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': false,
-      },
       {
         'image': 'assets/images/kfc.png',
         'name': 'Cold Drink',
@@ -473,96 +185,8 @@ class _MenuPageState extends State<MenuPage>
         'isVeg': true,
         'isSpicy': false,
         'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
-      },
-      {
-        'image': 'assets/images/chicken.jpg',
-        'name': 'Ice Cream',
-        'price': 'Rs 150',
-        'taste': 'Sweet',
-        'isVeg': true,
-        'isSpicy': false,
-        'isPopular': true,
+        'showDiscount': true,
+        'discountText': '25% OFF',
       },
     ],
   };
@@ -589,12 +213,93 @@ class _MenuPageState extends State<MenuPage>
         title: 'Menu',
         isBack: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-        child: Column(
-          children: [
-            // FILTER BAR
-            SizedBox(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // SEARCH BAR
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: TextField(
+                onChanged: (value) {},
+                decoration: InputDecoration(
+                  icon: SvgPicture.asset(
+                    'assets/icons/searchbar.svg',
+                    height: 19,
+                    width: 19,
+                  ),
+                  hintText: 'Search "biryani"',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.black45, fontSize: 16),
+                  suffixIcon: SvgPicture.asset('assets/icons/microphone.svg'),
+                  suffixIconConstraints: const BoxConstraints(
+                    minHeight: 20,
+                    minWidth: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Today's Special",
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 12),
+
+                SizedBox(
+                  height: 240,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: todaysSpecial.length,
+                    itemBuilder: (context, index) {
+                      final item = todaysSpecial[index];
+
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: SizedBox(
+                          width: 160,
+                          child: MenuCard(
+                            image: item['image'],
+                            title: item['name'],
+                            price: item['price'],
+                            taste: item['taste'],
+                            isveg: item['isVeg'],
+                            isSpicy: item['isSpicy'],
+                            isPopular: item['isPopular'],
+                            showDiscount: item["showDiscount"] ?? false,
+                            discountText: item["discountText"] ?? "50% OFF",
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 14),
+
+          // FILTER BAR
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: SizedBox(
               height: 50,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -625,43 +330,46 @@ class _MenuPageState extends State<MenuPage>
                 ),
               ),
             ),
+          ),
 
-            const SizedBox(height: 4),
+          const SizedBox(height: 4),
 
-            // TAB BAR
-            TabBar(
+          // TAB BAR
+          TabBar(
+            tabAlignment: TabAlignment.start,
+            dividerColor: Colors.transparent,
+            controller: _tabController,
+            isScrollable: true,
+            labelColor: Colors.orange,
+            unselectedLabelColor: Colors.black,
+            indicatorColor: Colors.orange,
+            tabs: tabs.map((tab) => Tab(text: tab)).toList(),
+          ),
+
+          const SizedBox(height: 10),
+
+          // GRID CONTENT
+          Expanded(
+            child: TabBarView(
               controller: _tabController,
-              isScrollable: true,
-              labelColor: Colors.orange,
-              unselectedLabelColor: Colors.black,
-              indicatorColor: Colors.orange,
-              dividerColor: Colors.transparent,
-              tabs: tabs.map((tab) => Tab(text: tab)).toList(),
-            ),
+              children: tabs.map((tab) {
+                final tabItems = menuData[tab] ?? [];
 
-            const SizedBox(height: 10),
+                return GridView.builder(
+                  itemCount: tabItems.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.75,
+                  ),
+                  itemBuilder: (context, index) {
+                    final item = tabItems[index];
 
-            // TAB CONTENT
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: tabs.map((tab) {
-                  final tabItems = menuData[tab] ?? [];
-
-                  return GridView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: tabItems.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.75,
-                        ),
-                    itemBuilder: (context, index) {
-                      final item = tabItems[index];
-
-                      return MenuCard(
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        left: index % 2 == 0 ? 16 : 8,
+                        right: index % 2 == 0 ? 8 : 16,
+                      ),
+                      child: MenuCard(
                         image: item["image"],
                         title: item["name"],
                         price: item["price"],
@@ -669,19 +377,20 @@ class _MenuPageState extends State<MenuPage>
                         isveg: item["isVeg"],
                         isSpicy: item["isSpicy"],
                         isPopular: item["isPopular"],
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
+                        showDiscount: item["showDiscount"] ?? false,
+                        discountText: item["discountText"] ?? "50% OFF",
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  // FILTER BUTTON
   Widget _buildFilterButton({
     required String icon,
     required String text,
@@ -699,7 +408,7 @@ class _MenuPageState extends State<MenuPage>
           ),
           child: Row(
             children: [
-              SvgPicture.asset(icon, height: 16, width: 16),
+              SvgPicture.asset(icon, height: 16),
               const SizedBox(width: 8),
               Text(text),
               if (showArrow) const Icon(Icons.arrow_drop_down),
@@ -710,7 +419,6 @@ class _MenuPageState extends State<MenuPage>
     );
   }
 
-  // FILTER SHEET
   Future _displayFilterDialog(BuildContext context) {
     return showModalBottomSheet(
       context: context,
