@@ -10,7 +10,6 @@ class MenuCard extends StatelessWidget {
   final bool isSpicy;
   final bool isPopular;
 
-  // DISCOUNT
   final bool showDiscount;
   final String discountText;
 
@@ -37,13 +36,11 @@ class MenuCard extends StatelessWidget {
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize: MainAxisSize.min,
         children: [
           // IMAGE SECTION
           Stack(
             clipBehavior: Clip.none,
             children: [
-              // IMAGE
               ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12),
@@ -57,7 +54,6 @@ class MenuCard extends StatelessWidget {
                 ),
               ),
 
-              // DISCOUNT BADGE (FIXED - GUARANTEED VISIBLE)
               if (showDiscount)
                 Positioned(
                   top: 0,
@@ -85,7 +81,6 @@ class MenuCard extends StatelessWidget {
                   ),
                 ),
 
-              // ADD BUTTON
               Positioned(
                 bottom: 8,
                 right: 8,
@@ -106,104 +101,106 @@ class MenuCard extends StatelessWidget {
             ],
           ),
 
-          // BODY
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // TOP ROW
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      isveg
-                          ? 'assets/icons/veg.svg'
-                          : 'assets/icons/nonveg.svg',
-                      height: 12,
-                      width: 12,
-                    ),
-                    const SizedBox(width: 5),
-
-                    if (isSpicy)
+          // ✅ FIX STARTS HERE
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min, // 🔥 FIX
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // TOP ROW
+                  Row(
+                    children: [
                       SvgPicture.asset(
-                        'assets/icons/chilli.svg',
+                        isveg
+                            ? 'assets/icons/veg.svg'
+                            : 'assets/icons/nonveg.svg',
                         height: 12,
                         width: 12,
                       ),
+                      const SizedBox(width: 5),
 
-                    const SizedBox(width: 5),
-
-                    Expanded(
-                      child: Text(
-                        taste,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: taste == "Spicy" ? Colors.red : Colors.black,
+                      if (isSpicy)
+                        SvgPicture.asset(
+                          'assets/icons/chilli.svg',
+                          height: 12,
+                          width: 12,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
 
-                const SizedBox(height: 6),
+                      const SizedBox(width: 5),
 
-                // TITLE
-                Text(
-                  title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 13),
-                ),
-
-                const SizedBox(height: 6),
-
-                // POPULAR
-                if (isPopular)
-                  Row(
-                    children: [
-                      Container(
-                        width: 29,
-                        height: 6,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            width: 18,
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "Highly reordered",
+                          taste,
+                          maxLines: 1, // 🔥 FIX
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 10, color: Colors.grey),
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: taste == "Spicy" ? Colors.red : Colors.black,
+                          ),
                         ),
                       ),
                     ],
                   ),
 
-                const SizedBox(height: 6),
-
-                // PRICE
-                Text(
-                  price,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
+                  const SizedBox(height: 4), //  reduced
+                  // TITLE
+                  Text(
+                    title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 13),
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 4), // reduced
+                  // POPULAR
+                  if (isPopular)
+                    Row(
+                      children: [
+                        Container(
+                          width: 29,
+                          height: 6,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              width: 18,
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        const Expanded(
+                          child: Text(
+                            "Highly reordered",
+                            maxLines: 1, //FIX
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                  // PRICE
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+          // FIX ENDS HERE
         ],
       ),
     );
