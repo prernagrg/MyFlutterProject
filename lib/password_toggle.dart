@@ -7,6 +7,7 @@ class PasswordToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Build');
     return Scaffold(
       appBar: AppBar(title: const Text("Password Toggle")),
       body: Padding(
@@ -18,7 +19,7 @@ class PasswordToggle extends StatelessWidget {
               obscureText: state.isHidden,
               decoration: InputDecoration(
                 labelText: "Password",
-                border: const OutlineInputBorder(),
+                border: OutlineInputBorder(),
 
                 suffixIcon: IconButton(
                   onPressed: () {
