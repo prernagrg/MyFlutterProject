@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:learn/bloc/counter_bloc.dart';
 import 'package:learn/bloc/password_bloc.dart';
 import 'package:learn/cubit/counter_cubit.dart';
-import 'package:learn/password_toggle.dart';
+import 'package:learn/features/auth/presentation/pages/sign_in.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         ),
-        home: PasswordToggle(),
+        home: SignInPage(),
       ),
     );
   }
