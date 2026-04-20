@@ -3,10 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:learn/bloc/counter_bloc.dart';
 import 'package:learn/bloc/password_bloc.dart';
+import 'package:learn/core/secrets/app_secrets.dart';
 import 'package:learn/cubit/counter_cubit.dart';
 import 'package:learn/features/auth/presentation/pages/sign_in.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final supabase = await Supabase.initialize(
+    url: AppSecrets.supabaseUrl,
+    anonKey: AppSecrets.subabaseAnonKey,
+  );
   runApp(const MyApp());
 }
 
