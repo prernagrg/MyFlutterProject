@@ -3,12 +3,12 @@ import 'package:learn/core/error/failures.dart';
 import 'package:learn/core/usecase/usecase.dart';
 import 'package:learn/features/auth/domain/repository/auth_repository.dart';
 
-class UserSignUp implements Usecase<String, userSignUpParamaters> {
+class UserSignUp implements Usecase<String, UserSignUpParamaters> {
   final AuthRepository authRepository;
   const UserSignUp(this.authRepository);
   @override
-  Future<Either<Failure, String>> call(userSignUpParamaters params) async {
-    return await authRepository.signInWithEmailPassword(
+  Future<Either<Failure, String>> call(UserSignUpParamaters params) async {
+    return await authRepository.signUpWithEmailPassword(
       name: params.name,
       email: params.email,
       password: params.password,
@@ -16,12 +16,12 @@ class UserSignUp implements Usecase<String, userSignUpParamaters> {
   }
 }
 
-class userSignUpParamaters {
+class UserSignUpParamaters {
   final String email;
   final String password;
   final String name;
 
-  userSignUpParamaters({
+  UserSignUpParamaters({
     required this.email,
     required this.password,
     required this.name,
