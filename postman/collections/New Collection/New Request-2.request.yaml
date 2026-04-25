@@ -1,0 +1,12 @@
+$kind: http-request
+name: New Request
+url: https://teamsever-backend.onrender.com/api/workspaces
+method: POST
+body:
+  type: json
+  content: "{\r\n  \"name\": \"xyz\"\r\n}"
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTg5ZDExMjUzNmE4Y2NmZDYyNWE1YyIsImVtYWlsIjoiam9obkBleGFtcGxlLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTc3Njg1MjI0MSwiZXhwIjoxNzc3NDU3MDQxfQ.4l158Kcei7UTXRsA92mBmlYw33grbAJUQ5tzaEwiEn
+order: 1876889071110922
